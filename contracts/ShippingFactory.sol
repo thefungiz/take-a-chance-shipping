@@ -2,7 +2,6 @@ pragma solidity ^0.4.17;
 import "./Ship.sol";
 
 contract ShippingFactory {
-    enum DeliveryState { Pending, InTransit, Complete, Damage, WrongItem }
     
     event ShippingEvent(
         address indexed _seller,
@@ -24,17 +23,16 @@ contract ShippingFactory {
     }
 
     // Called by shipper
-    function shipperCreateContract(address _seller, address _buyer, uint256 _purchaseAmount) internal returns(address) {
+    function shipperCreateContract(address _seller, address _buyer, uint256 _purchaseAmount) public payable {
         address shipper = msg.sender;
         bytes32 escrowHash = keccak256(_seller, _buyer, _purchaseAmount);
         require(msg.value == _purchaseAmount);
         require(escrow[escrowHash][_buyer]);
         address newShippingContract = new Ship(_seller, shipper, _buyer, _purchaseAmount);
         emit ShippingEvent(_seller, shipper, _buyer, newShippingContract, _purchaseAmount);
-        return newShippingContract; // hack
     }
 
-    // pickup function
+
 
     // dropoff function
 
