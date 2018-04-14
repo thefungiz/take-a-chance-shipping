@@ -6,6 +6,8 @@ import daccounts from '../public/accounts'
 import './css/oswald.css'
 import './css/open-sans.css'
 import './css/pure-min.css'
+import './css/skeleton.css'
+import './css/normalize.css'
 import './App.css'
 
 class App extends Component {
@@ -26,8 +28,10 @@ class App extends Component {
     getWeb3
     .then(results => {
       this.setState({
-        web3: results.web3
+        web3: results.web3,
+        etherAmount: 1
       })
+
 
       // Instantiate contract once web3 provided.
       // this.instantiateContract()
@@ -78,16 +82,14 @@ class App extends Component {
     sf.setProvider(this.state.web3.currentProvider)
     var sfi;
 
-    // sf.deployed().then((instance) => {
-    //   sfi = instance;
-    //   sfi.buyerInitialize(this.state.web3.eth.accounts[1], 90);
-    // });
+    var amount = this.state.etherAmount * 1e18;
 
     this.state.web3.eth.getAccounts((error, caccounts) => {
       sf.deployed().then((instance) => {
         sfi = instance;
+
         console.log("buyer", caccounts[0])
-        sfi.buyerInitialize(caccounts[0], 90, {from:this.state.web3.eth.coinbase});
+        sfi.buyerInitialize(caccounts[0], amount, {from:this.state.web3.eth.coinbase, value:amount});
       });
     })
   }
@@ -96,15 +98,31 @@ class App extends Component {
     return (
       <div className="App">
         <nav className="navbar pure-menu pure-menu-horizontal">
-            <a href="#" className="pure-menu-heading pure-menu-link">Truffle Box</a>
+            <a href="#" className="pure-menu-heading pure-menu-link">Take a Chance! Shipping</a>
         </nav>
 
         <main className="container">
           <div className="pure-g">
             <div className="pure-u-1-1">
-              <h1>Shop</h1>
-              <h2>Fried Chicken</h2>
-              <input type="button" value="buy" onClick={this.buyerInitialize}/>
+              <h2>Shop</h2>
+              <div className="row">
+                <div className="five columns">
+                  <div className="row">
+                  <h1>Fried Chicken</h1>
+                  </div>
+                  <div className="row">
+                    <img alt="chicken" src="https://commons.wikimedia.org/wiki/File:Fried-Chicken-Leg.jpg"/>
+                  </div>
+                </div>
+                <div className="seven columns">
+                  <div className="row">
+                    Ether amount: {this.state.etherAmount}
+                  </div>
+                  <div className="row">
+                    <input type="button" value="buy" onClick={this.buyerInitialize}/>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </main>

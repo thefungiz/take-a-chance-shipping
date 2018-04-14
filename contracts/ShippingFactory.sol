@@ -12,6 +12,12 @@ contract ShippingFactory {
         uint256 _purchaseAmount
     );
 
+    event BuyerInitialize (
+        address indexed _seller,
+        address indexed _buyer,
+        uint256 _purchaseAmount  
+    );
+
     // Key is hash for escrow ID
     mapping(bytes32 => mapping(address => bool)) public escrow;
 
@@ -21,6 +27,7 @@ contract ShippingFactory {
         require(msg.value == _purchaseAmount);
         bytes32 escrowHash = keccak256(_seller, buyer, _purchaseAmount);
         escrow[escrowHash][msg.sender] = true;
+        emit BuyerInitialize(buyer, _seller, _purchaseAmount);
     }
 
     // Called by shipper
