@@ -1,8 +1,9 @@
 pragma solidity ^0.4.17;
+
 import "./Ship.sol";
 
 contract ShippingFactory {
-    
+    address public owner;   
     event ShippingEvent(
         address indexed _seller,
         address indexed _shipper,
@@ -23,7 +24,7 @@ contract ShippingFactory {
     }
 
     // Called by shipper
-    function shipperCreateContract(address _seller, address _buyer, uint256 _purchaseAmount) public payable {
+    function shipperCreateContract(address _seller, address _buyer, uint256 _purchaseAmount) payable public {
         address shipper = msg.sender;
         bytes32 escrowHash = keccak256(_seller, _buyer, _purchaseAmount);
         require(msg.value == _purchaseAmount);

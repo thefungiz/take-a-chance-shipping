@@ -3,16 +3,16 @@ pragma solidity ^0.4.17;
 contract Ship {
     enum DeliveryState { Ordered, InTransit, Complete, Damage, WrongItem }
 
-    uint256 purchaseAmount;
-    address seller;
-    address shipper;
-    address buyer;
-    uint contractTime;
-    uint pickupTime;
-    uint dropoffTime;
-    DeliveryState deliveryState;
+    uint256 public purchaseAmount;
+    address public seller;
+    address public shipper;
+    address public buyer;
+    uint public contractTime;
+    uint public pickupTime;
+    uint public dropoffTime;
+    DeliveryState public deliveryState;
 
-    function Ship(address _seller, address _shipper, address _buyer, uint256 _purchaseAmount) public {
+    function Ship(address _seller, address _shipper, address _buyer, uint256 _purchaseAmount) payable public {
         seller = _seller;
         shipper = _shipper;
         buyer = _buyer;
