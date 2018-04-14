@@ -3,7 +3,7 @@ pragma solidity ^0.4.17;
 import "./Ship.sol";
 
 contract ShippingFactory {
-    address public owner;   
+
     event ShippingEvent(
         address indexed _seller,
         address indexed _shipper,
