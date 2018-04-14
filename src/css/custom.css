@@ -1,0 +1,19 @@
+.item-border {
+    margin: .5em;
+    padding: 1em;
+    border: 1px solid #E1E1E1;
+    border-radius: 4px;
+}
+
+.basic-margin {
+    margin: .5em;
+}
+
+.item-height {
+    width: 100%;
+    max-height: 12em;
+}
+
+.ether-sign {
+    width: .5em;
+}
