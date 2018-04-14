@@ -22,6 +22,7 @@ contract ShippingFactory {
     mapping(bytes32 => mapping(address => bool)) public escrow;
 
     // Buyer is going to initialize
+    // T1
     function buyerInitialize(address _seller, uint256 _purchaseAmount) public payable {
         address buyer = msg.sender;
         require(msg.value == _purchaseAmount);
@@ -31,12 +32,13 @@ contract ShippingFactory {
     }
 
     // Called by shipper
-    function shipperCreateContract(address _seller, address _buyer, uint256 _purchaseAmount) payable public {
+    // T2
+    function shipperCreateContract(address _seller, address _buyer, uint256 _purchaseAmount, uint256 _sellerGeotag, uint256 _buyerGeotag) payable public {
         address shipper = msg.sender;
         bytes32 escrowHash = keccak256(_seller, _buyer, _purchaseAmount);
         require(msg.value == _purchaseAmount);
         require(escrow[escrowHash][_buyer]);
-        address newShippingContract = new Ship(_seller, shipper, _buyer, _purchaseAmount);
+        address newShippingContract = new Ship(_seller, shipper, _buyer, _purchaseAmount, _sellerGeotag, _buyerGeotag);
         emit ShippingEvent(_seller, shipper, _buyer, newShippingContract, _purchaseAmount);
     }
 

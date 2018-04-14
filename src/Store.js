@@ -67,11 +67,7 @@ class Store extends Component {
   render() {
     return (
       <div className="App">
-        <nav className="navbar pure-menu pure-menu-horizontal">
-          <a href="#" className="pure-menu-heading pure-menu-link">Take a Chance! Shipping</a>
-        </nav>
-
-        <main className="container">
+        <div className="container">
           <div className="pure-g">
             <div className="pure-u-1-1">
               <h2>Shop</h2>
@@ -106,7 +102,7 @@ class Store extends Component {
               </div>
             </div>
           </div>
-        </main>
+        </div>
       </div>
     );
   }

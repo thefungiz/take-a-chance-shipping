@@ -5,7 +5,7 @@ contract("ShippingFactory", function(accounts) {
   var ship;
 
   before(async() => {
-    ship = await Ship.new(accounts[0], accounts[1], accounts[2], 1000);
+    ship = await Ship.new(accounts[0], accounts[1], accounts[2], 1000, 90, 90);
   });
 
   it("should have a buyer", async() => {
@@ -26,6 +26,16 @@ contract("ShippingFactory", function(accounts) {
   it("should have a purchase amount", async() => {
     let purchaseAmount = await ship.purchaseAmount();
     assert.equal(purchaseAmount, 1000);
+  });
+  
+  it("should have a seller geotag", async() => {
+    let buyerGeotag = await ship.buyerGeotag();
+    assert.equal(buyerGeotag, 90);
+  });
+
+  it("should have a buyer geotag", async() => {
+    let buyerGeotag = await ship.buyerGeotag();
+    assert.equal(buyerGeotag, 90);
   });
 
 });

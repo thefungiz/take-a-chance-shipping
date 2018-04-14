@@ -24,12 +24,15 @@ class App extends Component {
     return (
       <HashRouter>
         <div>
-          <h1>Simple SPA</h1>
-          <ul className="header">
+        <nav className="navbar pure-menu pure-menu-horizontal header-margin-bottom">
+          <a href="#" className="pure-menu-heading pure-menu-link ">Take a Chance! Shipping</a>
+
+        </nav>
+        <ul className="header">
             <li><NavLink to="/store">Store</NavLink></li>
             <li><NavLink to="/shipping">Shipping</NavLink></li>
           </ul>
-          <div className="content">
+          <div className="content container">
             <Route exact path="/" component={Home} />
             <Route exact path="/home" component={Home} />
             <Route exact path="/store" component={Store} />

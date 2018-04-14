@@ -1,35 +1,53 @@
 pragma solidity ^0.4.17;
 
 contract Ship {
-    enum DeliveryState { Ordered, InTransit, Complete, Damage, WrongItem }
+    enum DeliveryStage { Ordered, InTransit, Delivered }
+    enum DeliveryState { Correct, Wrong }
 
     uint256 public purchaseAmount;
     address public seller;
     address public shipper;
     address public buyer;
-    uint public contractTime;
-    uint public pickupTime;
-    uint public dropoffTime;
+    uint256 public sellerGeotag;
+    uint256 public buyerGeotag;
+    DeliveryStage public deliveryStage;
     DeliveryState public deliveryState;
 
-    function Ship(address _seller, address _shipper, address _buyer, uint256 _purchaseAmount) payable public {
+    function Ship(address _seller, address _shipper, address _buyer, uint256 _purchaseAmount, uint256 _sellerGeotag, uint256 _buyerGeotag) payable public {
         seller = _seller;
         shipper = _shipper;
         buyer = _buyer;
         purchaseAmount = _purchaseAmount;
-        deliveryState = DeliveryState.Ordered;
-        contractTime = now;
+        deliveryStage = DeliveryStage.Ordered;
+        sellerGeotag = _sellerGeotag;
+        buyerGeotag = _buyerGeotag;
     }
 
-    function pickupShipment() public {
+    modifier isShipper {
         require(msg.sender == shipper);
-        deliveryState = DeliveryState.InTransit;
-        pickupTime = now;
+        _;
     }
 
-    function shipmentRecieved(DeliveryState _deliveryState) public {
+    modifier isBuyer {
         require(msg.sender == buyer);
+        _;
+    }
+
+    // T3
+    function pickupShipment(uint256 geotag) public isShipper {
+        require(geotag == sellerGeotag);
+        deliveryStage = DeliveryStage.InTransit;
+    }
+
+    // T4
+    function shipmentRecieved(uint256 geotag) public isShipper {
+        require(geotag == buyerGeotag);
+        deliveryStage = DeliveryStage.Delivered;
+    }
+
+    // T5
+    function buyerValidation(DeliveryState _deliveryState) public isBuyer {
         deliveryState = _deliveryState;
-        dropoffTime = now;
+        // based off of state, divy escrow
     }
 }

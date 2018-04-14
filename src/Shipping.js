@@ -7,7 +7,8 @@ class Home extends Component {
         super(props)
         let shippingId = props.match.params["sid"]
         this.state = {
-            web3: null
+            web3: null,
+            shipStep: 1
         }
         if (shippingId) {
             this.state.sid = shippingId;
@@ -28,11 +29,13 @@ class Home extends Component {
 
     render() {
         return (
-            <div className="container">
-                <h2>Shipping</h2>
-                <div>
+            <div>
+                <div className="content-margin-top">
+                <h2 className="content-margin-top">Shipping</h2>
+                <div className="item-border">
                     <h4>Order ID: {this.state.sid}</h4>
                     <div className="row">
+                        <div className="one column"></div>
                         <div className="two columns">Buyer Initialization</div>
                         <div className="two columns">Pickup</div>
                         <div className="two columns">In-Transit</div>
@@ -40,6 +43,16 @@ class Home extends Component {
                         <div className="two columns">Buyer Verification</div>
                         <div className="one column"></div>
                     </div>
+                    <div className="row margin-top">
+                        <div className="one column"></div>
+                        <div className="two columns"><div className={(this.state.shipStep > 0 ? 'green-dot' : 'gray-dot')}></div></div>
+                        <div className="two columns"><div className={this.state.shipStep > 1 ? "green-dot" : "gray-dot"}></div></div>
+                        <div className="two columns"><div className={this.state.shipStep > 2 ? "green-dot" : "gray-dot"}></div></div>
+                        <div className="two columns"><div className={this.state.shipStep > 3 ? "green-dot" : "gray-dot"}></div></div>
+                        <div className="two columns"><div className={this.state.shipStep > 4 ? "green-dot" : "gray-dot"}></div></div>
+                        <div className="one column"></div>
+                    </div>
+                </div>
                 </div>
             </div>
         );

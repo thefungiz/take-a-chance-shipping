@@ -37,3 +37,16 @@ sf.allEvents({},{fromBlock:0, toBlock:"latest"}, function(e,r) {console.log(r)})
 
 # React
 `npm run start`
+
+
+```
+web3.eth.accounts[x]
+seller = 1
+shipper = 2
+buyer = 3
+```
+
+```
+seller geotag: 455
+buyer geotag: 788
+```
