@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import SimpleStorageContract from '../build/contracts/SimpleStorage.json'
+import ShippingFactory from '../build/contracts/ShippingFactory.json'
 import getWeb3 from './utils/getWeb3'
+import daccounts from '../public/accounts'
 
 import './css/oswald.css'
 import './css/open-sans.css'
@@ -10,11 +11,12 @@ import './App.css'
 class App extends Component {
   constructor(props) {
     super(props)
-
+    console.log(daccounts)
     this.state = {
       storageValue: 0,
       web3: null
     }
+    this.buyerInitialize = this.buyerInitialize.bind(this)
   }
 
   componentWillMount() {
@@ -28,7 +30,7 @@ class App extends Component {
       })
 
       // Instantiate contract once web3 provided.
-      this.instantiateContract()
+      // this.instantiateContract()
     })
     .catch(() => {
       console.log('Error finding web3.')
@@ -42,8 +44,10 @@ class App extends Component {
      * Normally these functions would be called in the context of a
      * state management library, but for convenience I've placed them here.
      */
+    // buyer view
+    
 
-    const contract = require('truffle-contract')
+    /**
     const simpleStorage = contract(SimpleStorageContract)
     simpleStorage.setProvider(this.state.web3.currentProvider)
 
@@ -65,6 +69,27 @@ class App extends Component {
         return this.setState({ storageValue: result.c[0] })
       })
     })
+    */
+  }
+
+  buyerInitialize() {
+    const contract = require('truffle-contract');
+    const sf = contract(ShippingFactory)
+    sf.setProvider(this.state.web3.currentProvider)
+    var sfi;
+
+    // sf.deployed().then((instance) => {
+    //   sfi = instance;
+    //   sfi.buyerInitialize(this.state.web3.eth.accounts[1], 90);
+    // });
+
+    this.state.web3.eth.getAccounts((error, caccounts) => {
+      sf.deployed().then((instance) => {
+        sfi = instance;
+        console.log("buyer", caccounts[0])
+        sfi.buyerInitialize(caccounts[0], 90, {from:this.state.web3.eth.coinbase});
+      });
+    })
   }
 
   render() {
@@ -77,12 +102,9 @@ class App extends Component {
         <main className="container">
           <div className="pure-g">
             <div className="pure-u-1-1">
-              <h1>Good to Go!</h1>
-              <p>Your Truffle Box is installed and ready.</p>
-              <h2>Smart Contract Example</h2>
-              <p>If your contracts compiled and migrated successfully, below will show a stored value of 5 (by default).</p>
-              <p>Try changing the value stored on <strong>line 59</strong> of App.js.</p>
-              <p>The stored value is: {this.state.storageValue}</p>
+              <h1>Shop</h1>
+              <h2>Fried Chicken</h2>
+              <input type="button" value="buy" onClick={this.buyerInitialize}/>
             </div>
           </div>
         </main>
