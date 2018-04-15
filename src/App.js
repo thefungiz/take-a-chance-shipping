@@ -30,6 +30,7 @@ class App extends Component {
           <a href="#" className="pure-menu-heading pure-menu-link ">Take a Chance! Shipping</a>
           <NavLink className="pure-menu-heading pure-menu-link" to="/store">Store</NavLink>
           <NavLink className="pure-menu-heading pure-menu-link" to="/shipping">Shipping</NavLink>
+          <NavLink className="pure-menu-heading pure-menu-link" to="/userv">User Validation</NavLink>
           <NavLink className="pure-menu-heading pure-menu-link" to="/tools">Tools</NavLink>
         </nav>
         <ul className="header header-style">
