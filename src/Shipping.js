@@ -46,6 +46,7 @@ class Home extends Component {
                         step = step > 1 ? step + 1 : step;
                         self.setState({ shipStep: step });
                     });
+                    self.setState({sid: contract})
                 } else {
                     console.log('not found');
                 }

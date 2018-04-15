@@ -4,13 +4,14 @@ import daccounts from '../public/accounts'
 import ShippingFactory from '../build/contracts/ShippingFactory.json'
 import Ship from '../build/contracts/Ship.json'
 
-class Home extends Component {
+class QR extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
             web3: window.web3,
-            scon: null
+            message: 'no action has been taken'
+            
         };
         if (props.match.params["hash"]) {
             this.state.hash = props.match.params["hash"];
@@ -57,6 +58,7 @@ class Home extends Component {
                             (err, res) => {
                                 console.log('err', err)
                                 console.log('res', res)
+                                self.setState({message: 'You have dropped off the item!'})
                             });
                     } else
                         if (self.state.code == 'shipperd') {
@@ -64,6 +66,7 @@ class Home extends Component {
                                 (err, res) => {
                                     console.log('err', err)
                                     console.log('res', res)
+                                    self.setState({message: 'You have delivered the item!'})
                                 });
                         }
                 } else {
@@ -71,10 +74,6 @@ class Home extends Component {
                 }
             });
         });
-
-
-
-
     }
 
 
@@ -88,9 +87,9 @@ class Home extends Component {
 
     render() {
         return (
-            <p>qr {this.state.hash} {this.state.code} </p>
+            <h1> {this.state.message} </h1>
         );
     }
 }
 
-export default Home;
+export default QR;

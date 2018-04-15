@@ -1,7 +1,7 @@
 pragma solidity ^0.4.17;
 
 contract Ship {
-    enum DeliveryStage { Ordered, InTransit, Delivered }
+    enum DeliveryStage { Ordered, InTransit, Delivered, Validated }
     enum DeliveryState { Correct, Wrong }
 
     uint256 public purchaseAmount;
@@ -47,6 +47,7 @@ contract Ship {
 
     // T5
     function buyerValidation(DeliveryState _deliveryState) public isBuyer {
+        deliveryStage = DeliveryStage.Validated;
         deliveryState = _deliveryState;
         // based off of state, divy escrow
     }

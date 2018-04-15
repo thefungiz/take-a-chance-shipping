@@ -10,6 +10,7 @@ import Home from "./Home";
 import Tools from "./Tools";
 import Shipping from "./Shipping";
 import QR from "./QR";
+import BuyerVerification from "./BuyerVerification"
 
 import './css/oswald.css'
 import './css/open-sans.css'
@@ -43,6 +44,7 @@ class App extends Component {
             <Route exact path="/shipping/:sid" component={Shipping} />
             <Route exact path="/shipping" component={Shipping} />
             <Route exact path="/qr/:hash/:code" component={QR} />
+            <Route exact path="/buyerv/:hash" component={BuyerVerification} />
           </div>
         </div>
       </HashRouter>
