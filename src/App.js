@@ -30,7 +30,7 @@ class App extends Component {
           <a href="#" className="pure-menu-heading pure-menu-link ">Take a Chance! Shipping</a>
           <NavLink className="pure-menu-heading pure-menu-link" to="/store">Store</NavLink>
           <NavLink className="pure-menu-heading pure-menu-link" to="/shipping">Shipping</NavLink>
-          <NavLink className="pure-menu-heading pure-menu-link" to="/userv">User Validation</NavLink>
+          <NavLink className="pure-menu-heading pure-menu-link" to="/buyerv">User Validation</NavLink>
           <NavLink className="pure-menu-heading pure-menu-link" to="/tools">Tools</NavLink>
         </nav>
         <ul className="header header-style">
@@ -45,7 +45,7 @@ class App extends Component {
             <Route exact path="/shipping/:sid" component={Shipping} />
             <Route exact path="/shipping" component={Shipping} />
             <Route exact path="/qr/:hash/:code" component={QR} />
-            <Route exact path="/buyerv/:hash" component={BuyerVerification} />
+            <Route exact path="/buyerv" component={BuyerVerification} />
           </div>
         </div>
       </HashRouter>
