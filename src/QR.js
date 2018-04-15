@@ -37,9 +37,15 @@ class Home extends Component {
 
         sf.deployed().then(function(res) {
             sfi = res;
-            sfi.BuyerInitialize({}, {fromBlock: 0, toBlock:"latest"}, (err, res) => {
+            sfi.ShippingEvent({}, {fromBlock: 0, toBlock:"latest"}).get((err, res) => {
                 // todo, find the one we need
                 console.log(res)
+
+                let mostRecent = res.reverse()[0].args;
+                console.log(mostRecent); // ALL ARGS EMITTED
+
+                let contract = mostRecent._newShippingContract;
+                console.log(contract); // contract address
             });
         });
 
