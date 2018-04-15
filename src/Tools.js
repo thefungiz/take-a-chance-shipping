@@ -27,6 +27,7 @@ class Tools extends Component {
                     </label>
                 </div>
 
+                <div className="row">Shipper QR Code:</div>
                 <QRCode value={'http://localhost:3000/#/qr/' + this.state.code} />
                 <div className="row">
                     <a href={'http://localhost:3000/#/qr/' + this.state.code}>
