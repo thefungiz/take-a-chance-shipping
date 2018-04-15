@@ -38,7 +38,6 @@ code {
 
 .navbar {
   position: fixed;
-  padding: 5px;
   background: #0c1a2b;
   font-family: 'Oswald', 'Arial Narrow', sans-serif;
 }
@@ -65,4 +64,8 @@ code {
 .navbar .uport-logo {
   height: 16px;
   margin-right: 10px;
+}
+
+.header-style {
+    padding: 60px 20px;
 }
