@@ -49,13 +49,11 @@ class Store extends Component {
         sfi = instance;
 
         console.log("buyer", caccounts[0])
-         sfi.buyerInitialize(caccounts[0], amount, { from: this.state.web3.eth.coinbase, value: amount })
+         sfi.buyerInitialize(caccounts[0], amount, daccounts[2], { from: this.state.web3.eth.coinbase, value: amount })
           .then((res) => {
             this.setState({shippingId: res.receipt.transactionHash})
              console.log(res)
-            });;//, (err, res) => {console.log(res)});
-        // console.log(resp);
-        //sfi.buyerInitialize({}, {fromBlock: 0, toBlock: "latest"}, (err, res) => { console.log(+res)});
+            });
       });
     })
   }
