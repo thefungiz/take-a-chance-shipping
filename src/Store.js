@@ -21,7 +21,8 @@ class Store extends Component {
           initialAmount: .015,
           shippingCost: 0.0,
           shipperSelected: false,
-          totalAmount: "-"
+          totalAmount: "-",
+          shippingId: null
         })
         // Instantiate contract once web3 provided.
         // this.instantiateContract()
@@ -35,7 +36,7 @@ class Store extends Component {
     // move stuff here
   }
 
-  buyerInitialize() {
+  async buyerInitialize() {
     const contract = require('truffle-contract');
     const sf = contract(ShippingFactory)
     sf.setProvider(this.state.web3.currentProvider)
@@ -48,7 +49,13 @@ class Store extends Component {
         sfi = instance;
 
         console.log("buyer", caccounts[0])
-        sfi.buyerInitialize(caccounts[0], amount, { from: this.state.web3.eth.coinbase, value: amount });
+         sfi.buyerInitialize(caccounts[0], amount, { from: this.state.web3.eth.coinbase, value: amount })
+          .then((res) => {
+            this.setState({shippingId: res.receipt.transactionHash})
+             console.log(res)
+            });;//, (err, res) => {console.log(res)});
+        // console.log(resp);
+        //sfi.buyerInitialize({}, {fromBlock: 0, toBlock: "latest"}, (err, res) => { console.log(+res)});
       });
     })
   }
@@ -98,6 +105,9 @@ class Store extends Component {
                   <div className="row">
                     <input disabled={!this.state.shipperSelected} className="basic-margin" type="button" value="buy" onClick={this.buyerInitialize} />
                   </div>
+                </div>
+                <div className={this.state.shippingId != null ? 'display' : 'hide'}>
+                <a href={'http://localhost:3000/#/shipping/' + this.state.shippingId}> Shipping link</a>
                 </div>
               </div>
             </div>

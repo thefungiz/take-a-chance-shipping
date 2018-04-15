@@ -38,7 +38,7 @@ class App extends Component {
             <Route exact path="/store" component={Store} />
             <Route exact path="/shipping/:sid" component={Shipping} />
             <Route exact path="/shipping" component={Shipping} />
-            <Route exact path="/qr/:code" component={QR} />
+            <Route exact path="/qr/:hash/:code" component={QR} />
           </div>
         </div>
       </HashRouter>

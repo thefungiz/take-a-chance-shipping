@@ -45,3 +45,11 @@
   .body-margin-top {
     margin-top: 5em;
   }
+
+  .display {
+      display: block;
+  }
+
+  .hide {
+      display: none;
+  }
